@@ -140,6 +140,9 @@ function draw() {
 
   //red blocks
   fill("red");
+
+  rect(450, 510, 20, 20);
+
   rect(20, 160, 20, 20);
   rect(20, 270, 20, 20);
   rect(20, 340, 20, 20);
