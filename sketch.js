@@ -253,7 +253,8 @@ function draw() {
   fill("blue");
   rect(20, 20, 20, 20);
   rect(20, 90, 20, 20);
-  rect(20, 200, 20, 20);
+  rect(20, 210, 20, 20);
+  
 
   //grey blocks
   fill("grey");
