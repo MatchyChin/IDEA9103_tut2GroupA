@@ -1,3 +1,4 @@
+// create arrays for white square X, Y, Width, and Height original values
 let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 130, 130, 
   130, 130, 130, 130, 130, 130, 130, 130, 130, 200, 200, 200, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 
   320, 340, 460, 460, 530, 530, 530, 530, 530, 530, 530, 530, 530, 530, 570, 570, 570, 570, 570, 570, 570, 570, 
@@ -19,11 +20,13 @@ let wsH = [20, 120, 160, 50, 80, 40, 40, 50, 40, 10, 30, 40, 20, 120, 160, 20, 1
   80, 40, 20, 120, 160, 50, 20, 20, 40, 20, 20, 60, 40, 20, 60, 20, 20, 80, 20, 60, 160, 50, 70, 40, 20, 
   120, 160, 150, 40, 170, 60, 40];
 
+// create arrays to store white square X, Y, Width, and Height changing values based on window size
 let wsx = [];
 let wsy = [];
 let wsw = [];
 let wsh = [];
 
+// create arrays for red square X, Y, Width, and Height original values
 let rsX = [10, 20, 20, 20, 25, 50, 50, 50, 50, 50, 50, 50, 50, 110, 110, 110, 110, 130, 130, 150, 150, 180, 180, 200,
   220, 220, 220, 220, 220, 260, 280, 320, 360, 360, 380, 390, 400, 400, 420, 450, 470, 510, 510, 510, 510, 510, 510, 510,
   510, 510, 550, 550, 550, 550, 550, 550, 580, 590, 600, 610, 610, 610, 630, 650, 650, 690, 750, 750, 750, 750, 750, 770,
@@ -35,11 +38,13 @@ let rsY = [410, 160, 270, 340, 790, 0, 90, 460, 570, 630, 660, 700, 840, 270, 41
 let rsW = [20, 20, 90, 50, 50, 60, 70, 20, 80, 60, 60, 60, 60, 20];
 let rsH = [20, 15, 50, 60, 40, 100, 50, 30, 80, 80, 15, 40, 60, 40];
 
+// create arrays to store red square X, Y, Width, and Height changing values based on window size
 let rsx = [];
 let rsy = [];
 let rsw = [];
 let rsh = [];
 
+// create arrays for blue square X, Y, Width, and Height original values
 let bsX = [20, 20, 20, 20, 20, 50, 50, 50, 50, 70, 70, 90, 90, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110, 110,
   110, 110, 140, 220, 220, 220, 220, 220, 220, 220, 220, 220, 280, 285, 300, 300, 320, 320, 340, 360, 360, 360, 400,
   435, 455, 460, 460, 465, 510, 510, 510, 510, 510, 510, 550, 550, 550, 550, 590, 610, 610, 630, 650, 650, 670, 670,
@@ -53,11 +58,13 @@ let bsY = [20, 90, 210, 630, 700, 340, 410, 510, 760, 200, 610, 200, 610, 90, 16
 let bsW = [20, 20, 20, 20, 80, 80, 60, 60];
 let bsH = [20, 50, 15, 60, 50, 30, 45, 40];
 
+// create arrays to store blue square X, Y, Width, and Height changing values based on window size
 let bsx = [];
 let bsy = [];
 let bsw = [];
 let bsh = [];
 
+// create arrays for grey square X, Y, Width, and Height original values
 let gsX = [20, 20, 20, 30, 30, 30, 30, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 110, 110, 110, 110, 110, 110, 110, 150, 
   150, 150, 160, 180, 180, 180, 200, 200, 200, 200, 220, 220, 220, 220, 220, 220, 220, 220, 220, 220, 240, 260, 260, 
   300, 270, 280, 290, 300, 290, 270, 310, 340, 330, 380, 380, 400, 490, 490, 510, 510, 510, 510, 510, 510, 510, 510, 
@@ -74,29 +81,36 @@ let gsY = [40, 320, 760, 410, 510, 570, 840, 40, 140, 180, 250, 490, 610, 640, 7
 let gsW = [20, 20, 50, 30, 60, 40, 40, 80, 80, 60, 20, 20, 70];
 let gsH = [20, 30, 20, 20, 20, 20, 40, 20, 40, 30, 35, 15, 10];
 
+// create arrays to store grey square X, Y, Width, and Height changing values based on window size
 let gsx = [];
 let gsy = [];
 let gsw = [];
 let gsh = [];
 
+// set canvas as window size
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
+
+// resize canvas
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
 function draw() {
+  // background behind artwork
   background(0);
+
+  // artwork background (yellow)
   noStroke();
   fill(225, 204, 0);
+  let rectWidth = min(910, windowWidth);                // limit the width to 910
+  let rectHeight = map(rectWidth, 0, 910, 0, 900);      // maintain the aspect ratio
+  let x = (windowWidth - rectWidth) / 2;                // x coordinate offset
+  let y = (windowHeight - rectHeight) / 2;              // y coordinate offset
+  rect(x, y, rectWidth, rectHeight);                    // create yellow rect background
 
-  let rectWidth = min(910, windowWidth); // Limit the width to 910
-  let rectHeight = map(rectWidth, 0, 910, 0, 900); // Maintain the aspect ratio
-  let x = (windowWidth - rectWidth) / 2;
-  let y = (windowHeight - rectHeight) / 2;
-  rect(x, y, rectWidth, rectHeight);
-
-  // Map X to match resized canvas
+  // map X to match resized canvas and store the resized values to wsx, rsx, bsx, and gsx
   for (let i = 0; i < wsX.length; i++) {
     wsx[i] = map(wsX[i], 0, 910, 0, rectWidth) + x;
   }
@@ -110,7 +124,7 @@ function draw() {
     gsx[i] = map(gsX[i], 0, 910, 0, rectWidth) + x;
   }
 
-  // Map Y to match resized canvas
+  // map Y to match resized canvas and store the resized values to wsy, rsy, bsy, and gsy
   for (let i = 0; i < wsY.length; i++) {
     wsy[i] = map(wsY[i], 0, 900, 0, rectHeight) + y;
   }
@@ -124,7 +138,7 @@ function draw() {
     gsy[i] = map(gsY[i], 0, 900, 0, rectHeight) + y;
   }
 
-  // Map width to match resized canvas
+  // map width to match resized canvas and store the resized values to wsw, rsw, bsw, and gsw
   for (let i = 0; i < wsW.length; i++) {
     wsw[i] = map(wsW[i], 0, 910, 0, rectWidth);
   }
@@ -138,7 +152,7 @@ function draw() {
     gsw[i] = map(gsW[i], 0, 910, 0, rectWidth);
   }
 
-  // Map height to match resized canvas
+  // map height to match resized canvas and store the resized values to wsh, rsh, bsh, and gsh
   for (let i = 0; i < wsH.length; i++) {
     wsh[i] = map(wsH[i], 0, 900, 0, rectHeight);
   }
@@ -152,13 +166,14 @@ function draw() {
     gsh[i] = map(gsH[i], 0, 900, 0, rectHeight);
   }
 
-  //lightgrey blocks
+  // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
   fill("lightgrey");
   for (let i = 0; i < wsX.length; i++) {
     rect(wsx[i], wsy[i], wsw[i], wsh[i]);
   }
 
-  //red blocks
+  // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
+  // set IF - conditions when the width and height are not 20 x 20
   fill("FireBrick");
   for (let i = 0; i < rsX.length; i++) {
     if (i == 16 || i == 28 || i == 52 || i == 69 || i == 87) {
@@ -192,7 +207,8 @@ function draw() {
     }
   }
 
-  //blue blocks
+  // create blue blocks using the values from bsx[i], bsy[i], bsw[i], bsh[i]
+  // set IF - conditions when the width and height are not 20 x 20
   fill("Navy");
   for (let i = 0; i < bsX.length; i++) {
     if (i >= 9 && i <= 12 || i == 15 || i == 21) {
@@ -214,7 +230,8 @@ function draw() {
     }
   }
 
-  // grey blocks
+  // create grey blocks using the values from gsx[i], gsy[i], gsw[i], gsh[i]
+  // set IF - conditions when the width and height are not 20 x 20
    fill("grey");
   for (let i = 0; i < gsX.length; i++){
     if (i == 17 || i == 18 || i == 20){
