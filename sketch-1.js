@@ -1,3 +1,4 @@
+// For Audio Implementation 
 // create arrays for white square X, Y, Width, and Height original values
 let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 70, 130, 130, 
     130, 130, 130, 130, 130, 130, 130, 130, 130, 200, 200, 200, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240, 
