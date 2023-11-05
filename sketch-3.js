@@ -105,18 +105,18 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
     // background behind artwork
     background("white");
 
-    fill("black"); // Set text color to white
+    fill("black"); // Set text color to black
     textSize(15); // Set text font size to 24 pixels
     text("🌷Note: Move your mouse across the canvas to interact with the grid colors.", 10, 50);
   
     // artwork background 
     noStroke();
-    fill("white");                                      // change the color from yellow to red
+    fill("white");                                        // change the color from yellow to white
     let rectWidth = min(910, windowWidth);                // limit the width to 910
     let rectHeight = map(rectWidth, 0, 910, 0, 900);      // maintain the aspect ratio
     let x = (windowWidth - rectWidth) / 2;                // x coordinate offset
     let y = (windowHeight - rectHeight) / 2;              // y coordinate offset
-    rect(x, y, rectWidth, rectHeight);                    // create yellow rect background
+    rect(x, y, rectWidth, rectHeight);                    // create white rect background
   
     // map X to match resized canvas and store the resized values to wsx, rsx, bsx, and gsx
     for (let i = 0; i < wsX.length; i++) {
@@ -198,7 +198,8 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
     // set IF - conditions when the width and height are not 20 x 20
-    fill("#D6E2FA");  // change the color from FireBrick to light purple
+    // change the color from FireBrick to light purple
+    fill("#D6E2FA");
     for (let i = 0; i < rsX.length; i++) {
       if (i == 16 || i == 28 || i == 52 || i == 69 || i == 87) {
         rect(rsx[i], rsy[i], rsw[1], rsh[1]);
@@ -233,7 +234,8 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   
     // create blue blocks using the values from bsx[i], bsy[i], bsw[i], bsh[i]
     // set IF - conditions when the width and height are not 20 x 20
-    fill("#FFE4F6");  // change the color from Navy to light pink
+    // change the color from Navy to light pink
+    fill("#FFE4F6"); 
     for (let i = 0; i < bsX.length; i++) {
       if (i >= 9 && i <= 12 || i == 15 || i == 21) {
         rect(bsx[i], bsy[i], bsw[1], bsh[1]);
@@ -256,7 +258,8 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   
     // create grey blocks using the values from gsx[i], gsy[i], gsw[i], gsh[i]
     // set IF - conditions when the width and height are not 20 x 20
-     fill("#F9F5D4");  // change the color from grey to light yellow
+    // change the color from grey to light yellow
+     fill("#F9F5D4");  
     for (let i = 0; i < gsX.length; i++){
       if (i == 17 || i == 18 || i == 20){
         rect(gsx[i], gsy[i], gsw[1], gsh[1]);
