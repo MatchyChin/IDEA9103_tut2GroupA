@@ -88,6 +88,8 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   let gsw = [];
   let gsh = [];
   
+  let bsSpeed = 1;
+  let bySpeed = 1;
   // set canvas as window size
   function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -176,59 +178,83 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
     // set IF - conditions when the width and height are not 20 x 20
     fill("FireBrick");
-    for (let i = 0; i < rsX.length; i++) {
-      if (i == 16 || i == 28 || i == 52 || i == 69 || i == 87) {
-        rect(rsx[i], rsy[i], rsw[1], rsh[1]);
-      } else if (i == 18) {
-        rect(rsx[i], rsy[i], rsw[2], rsh[2]);
-      } else if (i == 19) {
-        rect(rsx[i], rsy[i], rsw[3], rsh[3]);
-      } else if (i == 20) {
-        rect(rsx[i], rsy[i], rsw[4], rsh[4]);
-      } else if (i == 29) {
-        rect(rsx[i], rsy[i], rsw[5], rsh[5]);
-      } else if (i == 38) {
-        rect(rsx[i], rsy[i], rsw[6], rsh[6]);
-      } else if (i == 43) {
-        rect(rsx[i], rsy[i], rsw[7], rsh[7]);
-      } else if (i == 59) {
-        rect(rsx[i], rsy[i], rsw[8], rsh[8]);
-      } else if (i == 63) {
-        rect(rsx[i], rsy[i], rsw[9], rsh[9]);
-      } else if (i == 64) {
-        rect(rsx[i], rsy[i], rsw[10], rsh[10]);
-      } else if (i == 71) {
-        rect(rsx[i], rsy[i], rsw[11], rsh[11]);
-      } else if (i == 74) {
-        rect(rsx[i], rsy[i], rsw[12], rsh[12]);
-      } else if (i == 77) {
-        rect(rsx[i], rsy[i], rsw[13], rsh[13]);
-      } else {
-        rect(rsx[i], rsy[i], rsw[0], rsh[0]);
-      }
+  for (let i = 0; i < rsX.length; i++) {
+    if (i == 16 || i == 28 || i == 52 || i == 69 || i == 87) {
+      rsX[i] -= bySpeed
+      rect(rsx[i], rsy[i], rsw[1], rsh[1]);
+    } else if (i == 18) {
+      rect(rsx[i], rsy[i], rsw[2], rsh[2]);
+    
+    } else if (i == 19) {
+      rect(rsx[i], rsy[i], rsw[3], rsh[3]);
+      
+    } else if (i == 20) {
+      rect(rsx[i], rsy[i], rsw[4], rsh[4]);
+      
+    } else if (i == 29) {
+      rect(rsx[i], rsy[i], rsw[5], rsh[5]);
+      
+    } else if (i == 38) {
+      rect(rsx[i], rsy[i], rsw[6], rsh[6]);
+      
+    } else if (i == 43) {
+      rect(rsx[i], rsy[i], rsw[7], rsh[7]);
+      
+    } else if (i == 59) {
+      rect(rsx[i], rsy[i], rsw[8], rsh[8]);
+      
+    } else if (i == 63) {
+      rect(rsx[i], rsy[i], rsw[9], rsh[9]);
+      
+    } else if (i == 64) {
+      rect(rsx[i], rsy[i], rsw[10], rsh[10]);
+      
+    } else if (i == 71) {
+      rect(rsx[i], rsy[i], rsw[11], rsh[11]);
+      
+    } else if (i == 74) {
+      rect(rsx[i], rsy[i], rsw[12], rsh[12]);
+      
+    } else if (i == 77) {
+      rect(rsx[i], rsy[i], rsw[13], rsh[13]);
+    } else {
+      rect(rsx[i], rsy[i], rsw[0], rsh[0]);
+      rsX[i] += bySpeed
+    }
     }
   
     // create blue blocks using the values from bsx[i], bsy[i], bsw[i], bsh[i]
     // set IF - conditions when the width and height are not 20 x 20
     fill("Navy");
-    for (let i = 0; i < bsX.length; i++) {
-      if (i >= 9 && i <= 12 || i == 15 || i == 21) {
-        rect(bsx[i], bsy[i], bsw[1], bsh[1]);
-      } else if (i == 22 || i == 24 || i == 28 || i == 80 || i == 90 || i == 95) {
-        rect(bsx[i], bsy[i], bsw[2], bsh[2]);
-      } else if (i == 36 || i == 41) {
-        rect(bsx[i], bsy[i], bsw[3], bsh[3]);
-      } else if (i == 63) {
-        rect(bsx[i], bsy[i], bsw[4], bsh[4]);
-      } else if (i == 64) {
-        rect(bsx[i], bsy[i], bsw[5], bsh[5]);
-      } else if (i == 83) {
-        rect(bsx[i], bsy[i], bsw[6], bsh[6]);
-      } else if (i == 86) {
-        rect(bsx[i], bsy[i], bsw[7], bsh[7]);
-      } else {
-        rect(bsx[i], bsy[i], bsw[0], bsh[0]);
-      }
+  for (let i = 0; i < bsX.length; i++) {
+    
+    if (i >= 9 && i <= 12 || i == 15 || i == 21) {
+      rect(bsx[i], bsy[i], bsw[1], bsh[1]);
+      
+      
+    } else if (i == 22 || i == 24 || i == 28 || i == 80 || i == 90 || i == 95) {
+      rect(bsx[i], bsy[i], bsw[2], bsh[2]);
+      bsX[i] += bsSpeed
+      
+    } else if (i == 36 || i == 41) {
+      rect(bsx[i], bsy[i], bsw[3], bsh[3]);
+    
+    } else if (i == 63) {
+      rect(bsx[i], bsy[i], bsw[4], bsh[4]);
+     
+    } else if (i == 64) {
+      rect(bsx[i], bsy[i], bsw[5], bsh[5]);
+      
+    } else if (i == 83) {
+      rect(bsx[i], bsy[i], bsw[6], bsh[6]);
+   
+    } else if (i == 86) {
+      rect(bsx[i], bsy[i], bsw[7], bsh[7]);
+      
+    } else {
+      rect(bsx[i], bsy[i], bsw[0], bsh[0]);
+      bsX[i] -= bsSpeed
+    } 
     }
   
     // create grey blocks using the values from gsx[i], gsy[i], gsw[i], gsh[i]
@@ -261,6 +287,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
         rect(gsx[i], gsy[i], gsw[12], gsh[12]);
       } else {
         rect(gsx[i], gsy[i], gsw[0], gsh[0]);
+        gsY[i] -= bySpeed
       }
     }
   }
