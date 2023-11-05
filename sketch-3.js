@@ -107,7 +107,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
 
     fill("black"); // Set text color to white
     textSize(15); // Set text font size to 24 pixels
-    text("Note: 🌷Move your mouse across the canvas to interact with the grid colors.", 10, 50);
+    text("🌷Note: Move your mouse across the canvas to interact with the grid colors.", 10, 50);
   
     // artwork background 
     noStroke();
@@ -177,6 +177,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
     // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
     // change the color'lightgrey' to dynamic macaroon color variations
     for (let i = 0; i < wsX.length; i++) {
+      
       // Calculate the color based on the grid position and time
       let angle = atan2(wsY[i] - mouseY, wsX[i] - mouseX);
       let distance = dist(wsX[i], wsY[i], mouseX, mouseY);
@@ -193,7 +194,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
       rect(wsx[i], wsy[i], wsw[i], wsh[i]); // Draw the grid
     }
     
-    t += 0.03; // Update the time variable for animation
+    t += 0.05; // Update the time variable for animation
   
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
     // set IF - conditions when the width and height are not 20 x 20
