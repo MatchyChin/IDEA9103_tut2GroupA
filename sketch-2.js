@@ -88,6 +88,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   let gsw = [];
   let gsh = [];
   
+  const bsSpeed = 10;
   // set canvas as window size
   function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -214,6 +215,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
     for (let i = 0; i < bsX.length; i++) {
       if (i >= 9 && i <= 12 || i == 15 || i == 21) {
         rect(bsx[i], bsy[i], bsw[1], bsh[1]);
+        bsX[i] += bsSpeed
       } else if (i == 22 || i == 24 || i == 28 || i == 80 || i == 90 || i == 95) {
         rect(bsx[i], bsy[i], bsw[2], bsh[2]);
       } else if (i == 36 || i == 41) {
