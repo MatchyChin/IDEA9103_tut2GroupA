@@ -87,6 +87,8 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   let gsy = [];
   let gsw = [];
   let gsh = [];
+
+  let t = 0; // Time variable for color change
   
   // set canvas as window size
   function setup() {
@@ -101,10 +103,13 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   function draw() {
     // background behind artwork
     background(0);
+
+    fill(255); // Set text color to white
+    text("❤️Move the mouse to change the background color.", 10, 20);
   
-    // artwork background (yellow)
+    // artwork background (change from yellow to white)
     noStroke();
-    fill(225, 204, 0);
+    fill("white");
     let rectWidth = min(910, windowWidth);                // limit the width to 910
     let rectHeight = map(rectWidth, 0, 910, 0, 900);      // maintain the aspect ratio
     let x = (windowWidth - rectWidth) / 2;                // x coordinate offset
@@ -168,10 +173,19 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
     }
   
     // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
-    fill("lightgrey");
+    // change 'lightgrey' to dynamic macaroon color variations
     for (let i = 0; i < wsX.length; i++) {
+      // Calculate the color based on the grid position and time
+      let angle = atan2(wsY[i] - mouseY, wsX[i] - mouseX);
+      let r = 250 - 80 * sin(t - angle); // pink tone
+      let g = 230 - 80 * sin(t + angle * 0.5); // green tone
+      let b = 250 - 80 * cos(t - angle * 0.3); // blue tone
+      
+      fill(r, g, b, 150); // Set the fill color with an opacity of 150 for a dreamy look
       rect(wsx[i], wsy[i], wsw[i], wsh[i]);
     }
+    
+    t += 0.01; // Update the time variable for animation
   
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
     // set IF - conditions when the width and height are not 20 x 20
