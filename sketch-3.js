@@ -88,7 +88,8 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   let gsw = [];
   let gsh = [];
 
-  let t = 0; // Time variable for color change
+  // Time variable for color change
+  let t = 0; 
   
   // set canvas as window size
   function setup() {
@@ -102,14 +103,15 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   
   function draw() {
     // background behind artwork
-    background(0);
+    background("white");
 
-    fill(255); // Set text color to white
-    text("❤️Move the mouse to change the background color.", 10, 20);
+    fill("black"); // Set text color to white
+    textSize(15); // Set text font size to 24 pixels
+    text("Note: 🌷Move your mouse across the canvas to interact with the grid colors.", 10, 50);
   
-    // artwork background (change from yellow to white)
+    // artwork background 
     noStroke();
-    fill("white");
+    fill("white");                                      // change the color from yellow to red
     let rectWidth = min(910, windowWidth);                // limit the width to 910
     let rectHeight = map(rectWidth, 0, 910, 0, 900);      // maintain the aspect ratio
     let x = (windowWidth - rectWidth) / 2;                // x coordinate offset
@@ -173,23 +175,29 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
     }
   
     // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
-    // change 'lightgrey' to dynamic macaroon color variations
+    // change the color'lightgrey' to dynamic macaroon color variations
     for (let i = 0; i < wsX.length; i++) {
       // Calculate the color based on the grid position and time
       let angle = atan2(wsY[i] - mouseY, wsX[i] - mouseX);
-      let r = 250 - 80 * sin(t - angle); // pink tone
-      let g = 230 - 80 * sin(t + angle * 0.5); // green tone
-      let b = 250 - 80 * cos(t - angle * 0.3); // blue tone
+      let distance = dist(wsX[i], wsY[i], mouseX, mouseY);
+      let offset = map(distance, 0, width, 0, TWO_PI); // Change the range to control the variation
       
-      fill(r, g, b, 150); // Set the fill color with an opacity of 150 for a dreamy look
-      rect(wsx[i], wsy[i], wsw[i], wsh[i]);
+      // Use a base blue tone and vary the brightness
+      let h = 200 + 10 * sin(t + offset); // Adjust the hue for a blue tone
+      let s = 80; // Keep the saturation full
+      let l = 60 + 5 * sin(t + offset); // Adjust the lightness for the gradient
+
+      // Use HSL color mode for easier control over hue and lightness
+      colorMode(HSL, 360, 100, 100, 100);
+      fill(h, s, l, 50); // Set the fill color with an opacity for a dreamy look
+      rect(wsx[i], wsy[i], wsw[i], wsh[i]); // Draw the grid
     }
     
-    t += 0.01; // Update the time variable for animation
+    t += 0.03; // Update the time variable for animation
   
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
     // set IF - conditions when the width and height are not 20 x 20
-    fill("FireBrick");
+    fill("#D6E2FA");  // change the color from FireBrick to light purple
     for (let i = 0; i < rsX.length; i++) {
       if (i == 16 || i == 28 || i == 52 || i == 69 || i == 87) {
         rect(rsx[i], rsy[i], rsw[1], rsh[1]);
@@ -224,7 +232,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   
     // create blue blocks using the values from bsx[i], bsy[i], bsw[i], bsh[i]
     // set IF - conditions when the width and height are not 20 x 20
-    fill("Navy");
+    fill("#FFE4F6");  // change the color from Navy to light pink
     for (let i = 0; i < bsX.length; i++) {
       if (i >= 9 && i <= 12 || i == 15 || i == 21) {
         rect(bsx[i], bsy[i], bsw[1], bsh[1]);
@@ -247,7 +255,7 @@ let wsX = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 40, 40, 40, 70, 70, 70, 70, 70, 7
   
     // create grey blocks using the values from gsx[i], gsy[i], gsw[i], gsh[i]
     // set IF - conditions when the width and height are not 20 x 20
-     fill("grey");
+     fill("#F9F5D4");  // change the color from grey to light yellow
     for (let i = 0; i < gsX.length; i++){
       if (i == 17 || i == 18 || i == 20){
         rect(gsx[i], gsy[i], gsw[1], gsh[1]);
