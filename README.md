@@ -2,7 +2,11 @@
 
 ## Audio - Mondrian's Vision
 
-What is in Mondrian's mind when he painted this artwork? 
+What was in Mondrian's mind when he painted this artwork? What did he see in this painting? Mondrain once said to put a little boogie-woogie into his work after he moved to New York in 1940 to escape World War II. Let's immerse into Mondrain's mind visually and auditorily with the aid of the animation and audio.
+
+### Interactive Instructions
+
+1. **Click anywhere on the screen** to begin the audio and wait for the animation to start. **Click anywhere on the screen** again to pause if you want. The blocks will dance with the boogie-woogie music.
 
 ## User Input - Interactive Color Blocks
 
