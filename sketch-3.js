@@ -107,7 +107,7 @@ function draw() {
 
   fill("black"); // Set text color to black
   textSize(15); // Set text font size to 24 pixels
-  text("🌷Note: Move your mouse across the canvas to interact with the grid colors.", 10, 50);
+  text("🌷Note: Move your mouse across the canvas to interact with the grid colors and blocks.", 10, 50);
 
   // artwork background 
   noStroke();
