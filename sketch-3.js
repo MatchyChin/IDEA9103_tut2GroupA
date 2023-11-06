@@ -218,8 +218,10 @@ function draw() {
   // change the color from FireBrick to light purple
   fill("#D6E2FA");
   for (let i = 0; i < rsX.length; i++) {
+
     // Determine the size index for the current block
     let sizeIndex;
+
     if (i == 16 || i == 28 || i == 52 || i == 69 || i == 87) {
       sizeIndex = 1;
     } else if (i == 18) {
@@ -249,6 +251,7 @@ function draw() {
     } else {
       sizeIndex = 0;
     }
+
     // Calculate the center of the current block
     let centerX = rsx[i] + rsw[sizeIndex] / 2;
     let centerY = rsy[i] + rsh[sizeIndex] / 2;
@@ -276,8 +279,10 @@ function draw() {
   // change the color from Navy to light pink
   fill("#FFE4F6"); 
   for (let i = 0; i < bsX.length; i++) {
+
     // Determine the size index for the current block
     let sizeIndex;
+
     if (i >= 9 && i <= 12 || i == 15 || i == 21) {
       sizeIndex = 1;
     } else if (i == 22 || i == 24 || i == 28 || i == 80 || i == 90 || i == 95) {
@@ -295,6 +300,7 @@ function draw() {
     } else {
       sizeIndex = 0;
     }
+
     // Calculate the center of the current block
     let centerX = bsx[i] + bsw[sizeIndex] / 2;
     let centerY = bsy[i] + bsh[sizeIndex] / 2;
@@ -322,8 +328,10 @@ function draw() {
   // change the color from grey to light yellow
    fill("#F9F5D4");  
   for (let i = 0; i < gsX.length; i++){
+
     // Determine the size index for the current block
     let sizeIndex;
+
     if (i == 17 || i == 18 || i == 20){
       sizeIndex = 1;
     } else if (i >= 24 && i <= 26 || i == 60){
@@ -351,6 +359,7 @@ function draw() {
     } else {
       sizeIndex = 0;
     }
+    
     // Calculate the center of the current block
     let centerX = gsx[i] + gsw[sizeIndex] / 2;
     let centerY = gsy[i] + gsh[sizeIndex] / 2;
