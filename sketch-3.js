@@ -177,21 +177,38 @@ function draw() {
   // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
   // change the color'lightgrey' to dynamic macaroon color variations
   for (let i = 0; i < wsX.length; i++) {
-    
-    // Calculate the color based on the grid position and time
-    let angle = atan2(wsY[i] - mouseY, wsX[i] - mouseX);
-    let distance = dist(wsX[i], wsY[i], mouseX, mouseY);
-    let offset = map(distance, 0, width, 0, TWO_PI); // Change the range to control the variation
-    
-    // Use a base blue tone and vary the brightness
-    let h = 200 + 10 * sin(t + offset); // Adjust the hue for a blue tone
-    let s = 80; // Keep the saturation full
-    let l = 60 + 5 * sin(t + offset); // Adjust the lightness for the gradient
 
-    // Use HSL color mode for easier control over hue and lightness
-    colorMode(HSL, 360, 100, 100, 100);
-    fill(h, s, l, 50); // Set the fill color with an opacity for a dreamy look
-    rect(wsx[i], wsy[i], wsw[i], wsh[i]); // Draw the grid
+   // Calculate the center of the current block
+   let centerX = wsx[i] + wsw[i] / 2;
+   let centerY = wsy[i] + wsh[i] / 2;
+
+   // Calculate the distance from the mouse to the center of the block
+   let distance = dist(mouseX, mouseY, centerX, centerY);
+
+   // Calculate the color based on the grid position and time
+   let angle = atan2(wsY[i] - mouseY, wsX[i] - mouseX);
+   let offset = map(distance, 0, width, 0, TWO_PI); // Change the range to control the variation
+
+   // Use a base blue tone and vary the brightness
+   let h = 200 + 10 * sin(t + offset); // Adjust the hue for a blue tone
+   let s = 80; // Keep the saturation full
+   let l = 60 + 5 * sin(t + offset); // Adjust the lightness for the gradient
+
+   // Scale the block size based on the distance
+   let scaleFactor = map(distance, 0, 200, 1.2, 1, true);
+
+   // Use the scaleFactor to determine the new size of the block
+   let newWidth = wsw[i] * scaleFactor;
+   let newHeight = wsh[i] * scaleFactor;
+
+   // Calculate the new top-left corner position based on the new size
+   let newPosX = centerX - newWidth / 2;
+   let newPosY = centerY - newHeight / 2;
+
+   // Use HSL color mode for easier control over hue and lightness
+   colorMode(HSL, 360, 100, 100, 100);
+   fill(h, s, l, 50); // Set the fill color with an opacity for a dreamy look
+   rect(newPosX, newPosY, newWidth, newHeight); // Draw the resized and recolored grid
   }
   
   t += 0.05; // Update the time variable for animation
