@@ -88,10 +88,10 @@ let gsy = [];
 let gsw = [];
 let gsh = [];
 
-let song;
-let fft;
-let lerpAmount;
+let song; // variable to hold the audio file
+let fft;  // variable to hold the Fast Fourier Transform (FFT) object
 
+// preload function to load the audio file before the sketch starts
 function preload() {
   song = loadSound("audio/Jack Black - Peaches midi.wav")
 }
@@ -100,9 +100,16 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
-  fft = new p5.FFT(0.8, 16);
+  // initialise the FFT object with a smoothing factor and the number of bins
+  fft = new p5.FFT(0.9, 32);
+
+  // connect the song (the audio player) to the fft (the frequency analyser)
   song.connect(fft);
+
+  // initialise the amplitude object
   amp = new p5.Amplitude();
+
+  // change rectangle mode to center for the scaling
   rectMode(CENTER);
 }
 
@@ -113,19 +120,21 @@ function windowResized() {
 
 function draw() {
   // background behind artwork
-  background(0);
+  background(225, 204, 0);
 
-  fill(255); // Set text color to white
+  fill(0); // Set text color to white
   text("Tap anywhere to start or pause the music", 10, 20);
 
   // artwork background (yellow)
-  
+  push();
+  noStroke();
   fill(225, 204, 0);
   let rectWidth = min(910, windowWidth);                // limit the width to 910
   let rectHeight = map(rectWidth, 0, 910, 0, 900);      // maintain the aspect ratio
   let x = (windowWidth - rectWidth) / 2;                // x coordinate offset
   let y = (windowHeight - rectHeight) / 2;              // y coordinate offset
   rect(x + rectWidth / 2, y + rectHeight / 2, rectWidth, rectHeight);                    // create yellow rect background
+  pop();
 
   // map X to match resized canvas and store the resized values to wsx, rsx, bsx, and gsx
   for (let i = 0; i < wsX.length; i++) {
@@ -183,128 +192,128 @@ function draw() {
     gsh[i] = map(gsH[i], 0, 900, 0, rectHeight);
   }
 
+  // analyse the spectrum of the song
   let spectrum = fft.analyze();
 
+  // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
+  fill("lightgrey");
+  for (let i = 0; i < wsX.length; i++) {
+    rect(wsx[i] + (wsw[i] / 2), wsy[i] + (wsh[i] / 2), wsw[i], wsh[i]);
+  }
 
-    // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
-    fill("lightgrey");
-    for (let i = 0; i < wsX.length; i++) {
-      rect(wsx[i] + (wsw[i] / 2), wsy[i] + (wsh[i] / 2), wsw[i], wsh[i]);
-    }
-
-    for (i = 0; i < spectrum.length; i += 20) {
-      let amp = spectrum[i];
-      let scale = map(amp, 0, 256, 0, 1.2);
+  // re-draw the blocks based on the spectrum data
+  for (i = 0; i < spectrum.length; i += 40) {
+    let amp = spectrum[i];
+    let scale = map(amp, 0, 256, 0, 1.2);
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
     // set IF - conditions when the width and height are not 20 x 20
     fill("FireBrick");
     for (let i = 0; i < rsX.length; i++) {
       if (i == 16 || i == 28 || i == 52 || i == 69 || i == 87) {
-        rect(rsx[i] + (rsw[1] / 2), rsy[i] + (rsh[1] / 2), rsw[1]*scale, rsh[1]*scale);
+        rect(rsx[i] + (rsw[1] / 2), rsy[i] + (rsh[1] / 2), rsw[1] * scale, rsh[1] * scale);
       } else if (i == 18) {
-        rect(rsx[i] + (rsw[2] / 2), rsy[i] + (rsh[2] / 2), rsw[2]*scale, rsh[2]*scale);
+        rect(rsx[i] + (rsw[2] / 2), rsy[i] + (rsh[2] / 2), rsw[2] * scale, rsh[2] * scale);
       } else if (i == 19) {
-        rect(rsx[i] + (rsw[3] / 2), rsy[i] + (rsh[3] / 2), rsw[3]*scale, rsh[3]*scale);
+        rect(rsx[i] + (rsw[3] / 2), rsy[i] + (rsh[3] / 2), rsw[3] * scale, rsh[3] * scale);
       } else if (i == 20) {
-        rect(rsx[i] + (rsw[4] / 2), rsy[i] + (rsh[4] / 2), rsw[4]*scale, rsh[4]*scale);
+        rect(rsx[i] + (rsw[4] / 2), rsy[i] + (rsh[4] / 2), rsw[4] * scale, rsh[4] * scale);
       } else if (i == 29) {
-        rect(rsx[i] + (rsw[5] / 2), rsy[i] + (rsh[5] / 2), rsw[5]*scale, rsh[5]*scale);
+        rect(rsx[i] + (rsw[5] / 2), rsy[i] + (rsh[5] / 2), rsw[5] * scale, rsh[5] * scale);
       } else if (i == 38) {
-        rect(rsx[i] + (rsw[6] / 2), rsy[i] + (rsh[6] / 2), rsw[6]*scale, rsh[6]*scale);
+        rect(rsx[i] + (rsw[6] / 2), rsy[i] + (rsh[6] / 2), rsw[6] * scale, rsh[6] * scale);
       } else if (i == 43) {
-        rect(rsx[i] + (rsw[7] / 2), rsy[i] + (rsh[7] / 2), rsw[7]*scale, rsh[7]*scale);
+        rect(rsx[i] + (rsw[7] / 2), rsy[i] + (rsh[7] / 2), rsw[7] * scale, rsh[7] * scale);
       } else if (i == 59) {
-        rect(rsx[i] + (rsw[8] / 2), rsy[i] + (rsh[8] / 2), rsw[8]*scale, rsh[8]*scale);
+        rect(rsx[i] + (rsw[8] / 2), rsy[i] + (rsh[8] / 2), rsw[8] * scale, rsh[8] * scale);
       } else if (i == 63) {
-        rect(rsx[i] + (rsw[9] / 2), rsy[i] + (rsh[9] / 2), rsw[9]*scale, rsh[9]*scale);
+        rect(rsx[i] + (rsw[9] / 2), rsy[i] + (rsh[9] / 2), rsw[9] * scale, rsh[9] * scale);
       } else if (i == 64) {
-        rect(rsx[i] + (rsw[10] / 2), rsy[i] + (rsh[10] / 2), rsw[10]*scale, rsh[10]*scale);
+        rect(rsx[i] + (rsw[10] / 2), rsy[i] + (rsh[10] / 2), rsw[10] * scale, rsh[10] * scale);
       } else if (i == 71) {
-        rect(rsx[i] + (rsw[11] / 2), rsy[i] + (rsh[11] / 2), rsw[11]*scale, rsh[11]*scale);
+        rect(rsx[i] + (rsw[11] / 2), rsy[i] + (rsh[11] / 2), rsw[11] * scale, rsh[11] * scale);
       } else if (i == 74) {
-        rect(rsx[i] + (rsw[12] / 2), rsy[i] + (rsh[12] / 2), rsw[12]*scale, rsh[12]*scale);
+        rect(rsx[i] + (rsw[12] / 2), rsy[i] + (rsh[12] / 2), rsw[12] * scale, rsh[12] * scale);
       } else if (i == 77) {
-        rect(rsx[i] + (rsw[13] / 2), rsy[i] + (rsh[13] / 2), rsw[13]*scale, rsh[13]*scale);
+        rect(rsx[i] + (rsw[13] / 2), rsy[i] + (rsh[13] / 2), rsw[13] * scale, rsh[13] * scale);
       } else {
-        rect(rsx[i] + (rsw[0] / 2), rsy[i] + (rsh[0] / 2), rsw[0]*scale, rsh[0]*scale);
+        rect(rsx[i] + (rsw[0] / 2), rsy[i] + (rsh[0] / 2), rsw[0] * scale, rsh[0] * scale);
       }
     }
   }
 
-    for (i = 0; i < spectrum.length; i += 3) {
-      let amp = spectrum[i];
-      let scale = map(amp, 0, 256, 0, 1.2);
+  // re-draw the blocks based on the spectrum data
+  for (i = 0; i < spectrum.length; i += 6) {
+    let amp = spectrum[i];
+    let scale = map(amp, 0, 256, 0, 1.2);
     // create blue blocks using the values from bsx[i], bsy[i], bsw[i], bsh[i]
     // set IF - conditions when the width and height are not 20 x 20
     fill("Navy");
     for (let i = 0; i < bsX.length; i++) {
       if (i >= 9 && i <= 12 || i == 15 || i == 21) {
-        rect(bsx[i] + (bsw[1] / 2), bsy[i] + (bsh[1] / 2), bsw[1]*scale, bsh[1]*scale);
+        rect(bsx[i] + (bsw[1] / 2), bsy[i] + (bsh[1] / 2), bsw[1] * scale, bsh[1] * scale);
       } else if (i == 22 || i == 24 || i == 28 || i == 80 || i == 90 || i == 95) {
-        rect(bsx[i] + (bsw[2] / 2), bsy[i] + (bsh[2] / 2), bsw[2]*scale, bsh[2]*scale);
+        rect(bsx[i] + (bsw[2] / 2), bsy[i] + (bsh[2] / 2), bsw[2] * scale, bsh[2] * scale);
       } else if (i == 36 || i == 41) {
-        rect(bsx[i] + (bsw[3] / 2), bsy[i] + (bsh[3] / 2), bsw[3]*scale, bsh[3]*scale);
+        rect(bsx[i] + (bsw[3] / 2), bsy[i] + (bsh[3] / 2), bsw[3] * scale, bsh[3] * scale);
       } else if (i == 63) {
-        rect(bsx[i] + (bsw[4] / 2), bsy[i] + (bsh[4] / 2), bsw[4]*scale, bsh[4]*scale);
+        rect(bsx[i] + (bsw[4] / 2), bsy[i] + (bsh[4] / 2), bsw[4] * scale, bsh[4] * scale);
       } else if (i == 64) {
-        rect(bsx[i] + (bsw[5] / 2), bsy[i] + (bsh[5] / 2), bsw[5]*scale, bsh[5]*scale);
+        rect(bsx[i] + (bsw[5] / 2), bsy[i] + (bsh[5] / 2), bsw[5] * scale, bsh[5] * scale);
       } else if (i == 83) {
-        rect(bsx[i] + (bsw[6] / 2), bsy[i] + (bsh[6] / 2), bsw[6]*scale, bsh[6]*scale);
+        rect(bsx[i] + (bsw[6] / 2), bsy[i] + (bsh[6] / 2), bsw[6] * scale, bsh[6] * scale);
       } else if (i == 86) {
-        rect(bsx[i] + (bsw[7] / 2), bsy[i] + (bsh[7] / 2), bsw[7]*scale, bsh[7]*scale);
+        rect(bsx[i] + (bsw[7] / 2), bsy[i] + (bsh[7] / 2), bsw[7] * scale, bsh[7] * scale);
       } else {
-        rect(bsx[i] + (bsw[0] / 2), bsy[i] + (bsh[0] / 2), bsw[0]*scale, bsh[0]*scale);
+        rect(bsx[i] + (bsw[0] / 2), bsy[i] + (bsh[0] / 2), bsw[0] * scale, bsh[0] * scale);
       }
     }
   }
 
-    for (i = 0; i < spectrum.length; i += 1) {
-      let amp = spectrum[i];
-      let scale = map(amp, 0, 256, 0, 1.2);
-      
+  // re-draw the blocks based on the spectrum data
+  for (i = 0; i < spectrum.length; i += 3) {
+    let amp = spectrum[i];
+    let scale = map(amp, 0, 256, 0, 1.2);
     // create grey blocks using the values from gsx[i], gsy[i], gsw[i], gsh[i]
     // set IF - conditions when the width and height are not 20 x 20
     fill("grey");
     for (let i = 0; i < gsX.length; i++) {
       if (i == 17 || i == 18 || i == 20) {
-        rect(gsx[i] + (gsw[1] / 2), gsy[i] + (gsh[1] / 2), gsw[1]*scale, gsh[1]*scale);
+        rect(gsx[i] + (gsw[1] / 2), gsy[i] + (gsh[1] / 2), gsw[1] * scale, gsh[1] * scale);
       } else if (i >= 24 && i <= 26 || i == 60) {
-        rect(gsx[i] + (gsw[2] / 2), gsy[i] + (gsh[2] / 2), gsw[2]*scale, gsh[2]*scale);
+        rect(gsx[i] + (gsw[2] / 2), gsy[i] + (gsh[2] / 2), gsw[2] * scale, gsh[2] * scale);
       } else if (i == 27 || i == 96 || i == 97) {
-        rect(gsx[i] + (gsw[3] / 2), gsy[i] + (gsh[3] / 2), gsw[3]*scale, gsh[3]*scale);
+        rect(gsx[i] + (gsw[3] / 2), gsy[i] + (gsh[3] / 2), gsw[3] * scale, gsh[3] * scale);
       } else if (i == 46) {
-        rect(gsx[i] + (gsw[4] / 2), gsy[i] + (gsh[4] / 2), gsw[4]*scale, gsh[4]*scale);
+        rect(gsx[i] + (gsw[4] / 2), gsy[i] + (gsh[4] / 2), gsw[4] * scale, gsh[4] * scale);
       } else if (i == 48) {
-        rect(gsx[i] + (gsw[5] / 2), gsy[i] + (gsh[5] / 2), gsw[5]*scale, gsh[5]*scale);
+        rect(gsx[i] + (gsw[5] / 2), gsy[i] + (gsh[5] / 2), gsw[5] * scale, gsh[5] * scale);
       } else if (i == 54 || i == 98) {
-        rect(gsx[i] + (gsw[6] / 2), gsy[i] + (gsh[6] / 2), gsw[6]*scale, gsh[6]*scale);
+        rect(gsx[i] + (gsw[6] / 2), gsy[i] + (gsh[6] / 2), gsw[6] * scale, gsh[6] * scale);
       } else if (i == 58) {
-        rect(gsx[i] + (gsw[7] / 2), gsy[i] + (gsh[7] / 2), gsw[7]*scale, gsh[7]*scale);
+        rect(gsx[i] + (gsw[7] / 2), gsy[i] + (gsh[7] / 2), gsw[7] * scale, gsh[7] * scale);
       } else if (i == 59) {
-        rect(gsx[i] + (gsw[8] / 2), gsy[i] + (gsh[8] / 2), gsw[8]*scale, gsh[8]*scale);
+        rect(gsx[i] + (gsw[8] / 2), gsy[i] + (gsh[8] / 2), gsw[8] * scale, gsh[8] * scale);
       } else if (i == 94) {
-        rect(gsx[i] + (gsw[9] / 2), gsy[i] + (gsh[9] / 2), gsw[9]*scale, gsh[9]*scale);
+        rect(gsx[i] + (gsw[9] / 2), gsy[i] + (gsh[9] / 2), gsw[9] * scale, gsh[9] * scale);
       } else if (i == 123) {
-        rect(gsx[i] + (gsw[10] / 2), gsy[i] + (gsh[10] / 2), gsw[10]*scale, gsh[10]*scale);
+        rect(gsx[i] + (gsw[10] / 2), gsy[i] + (gsh[10] / 2), gsw[10] * scale, gsh[10] * scale);
       } else if (i == 138) {
-        rect(gsx[i] + (gsw[11] / 2), gsy[i] + (gsh[11] / 2), gsw[11]*scale, gsh[11]*scale);
+        rect(gsx[i] + (gsw[11] / 2), gsy[i] + (gsh[11] / 2), gsw[11] * scale, gsh[11] * scale);
       } else if (i == 142) {
-        rect(gsx[i] + (gsw[12] / 2), gsy[i] + (gsh[12] / 2), gsw[12]*scale, gsh[12]*scale);
+        rect(gsx[i] + (gsw[12] / 2), gsy[i] + (gsh[12] / 2), gsw[12] * scale, gsh[12] * scale);
       } else {
-        rect(gsx[i] + (gsw[0] / 2), gsy[i] + (gsh[0] / 2), gsw[0]*scale, gsh[0]*scale);
+        rect(gsx[i] + (gsw[0] / 2), gsy[i] + (gsh[0] / 2), gsw[0] * scale, gsh[0] * scale);
       }
 
     }
   }
 }
 
-  function mousePressed() {
-    if (song.isPlaying()) {
-      // .isPlaying() returns a boolean
-      song.stop();
-      background(255, 0, 0);
-    } else {
-      song.play();
-      background(0, 255, 0);
-    }
+// function to start or pause the music when the canvas is clicked
+function mousePressed() {
+  if (song.isPlaying()) {
+    song.stop();
+  } else {
+    song.play();
   }
+}
