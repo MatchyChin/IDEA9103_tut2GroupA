@@ -93,7 +93,7 @@ let fft;  // variable to hold the Fast Fourier Transform (FFT) object
 
 // preload function to load the audio file before the sketch starts
 function preload() {
-  song = loadSound("audio/Jack Black - Peaches midi.wav")
+  song = loadSound("audio/The Boogie Woogie on Piano.wav")
 }
 
 // set canvas as window size
@@ -195,14 +195,19 @@ function draw() {
   // analyse the spectrum of the song
   let spectrum = fft.analyze();
 
+  // no stroke for the lightgrey not bouncing blocks
+  noStroke();
   // create lightgrey blocks using the values from wsx[i], wsy[i], wsw[i], wsh[i]
   fill("lightgrey");
   for (let i = 0; i < wsX.length; i++) {
     rect(wsx[i] + (wsw[i] / 2), wsy[i] + (wsh[i] / 2), wsw[i], wsh[i]);
   }
 
+  // white outline for the colored blocks
+  push()
+  stroke(255, 110);
   // re-draw the blocks based on the spectrum data
-  for (i = 0; i < spectrum.length; i += 40) {
+  for (i = 0; i < spectrum.length; i += 6) {
     let amp = spectrum[i];
     let scale = map(amp, 0, 256, 0, 1.2);
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
@@ -242,7 +247,7 @@ function draw() {
   }
 
   // re-draw the blocks based on the spectrum data
-  for (i = 0; i < spectrum.length; i += 6) {
+  for (i = 0; i < spectrum.length; i += 3) {
     let amp = spectrum[i];
     let scale = map(amp, 0, 256, 0, 1.2);
     // create blue blocks using the values from bsx[i], bsy[i], bsw[i], bsh[i]
@@ -270,7 +275,7 @@ function draw() {
   }
 
   // re-draw the blocks based on the spectrum data
-  for (i = 0; i < spectrum.length; i += 3) {
+  for (i = 0; i < spectrum.length; i += 1) {
     let amp = spectrum[i];
     let scale = map(amp, 0, 256, 0, 1.2);
     // create grey blocks using the values from gsx[i], gsy[i], gsw[i], gsh[i]
@@ -304,9 +309,9 @@ function draw() {
       } else {
         rect(gsx[i] + (gsw[0] / 2), gsy[i] + (gsh[0] / 2), gsw[0] * scale, gsh[0] * scale);
       }
-
     }
   }
+  pop()
 }
 
 // function to start or pause the music when the canvas is clicked
