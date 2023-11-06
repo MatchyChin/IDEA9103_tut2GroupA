@@ -11,3 +11,6 @@ Welcome to the Interactive Color Blocks experience! This dynamic visual display 
 2. The **distance of the cursor** from the center of a block will adjust its size – closer will increase the size and further away will decrease it.
 
 3. The **angle of the cursor** in relation to each block's centre will affect the color, creating a gradient of macaroon-inspired hues that vary as you move.
+
+## Time-Based - Knock Off
+The painting gives me the feeling of looking down on a traffic road, and my idea was to have the small squares represent the traffic and the large squares represent the buildings. 
