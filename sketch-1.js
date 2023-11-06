@@ -101,7 +101,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   // initialise the FFT object with a smoothing factor and the number of bins
-  fft = new p5.FFT(0.8, 16);
+  fft = new p5.FFT(0.9, 32);
 
   // connect the song (the audio player) to the fft (the frequency analyser)
   song.connect(fft);
@@ -120,19 +120,21 @@ function windowResized() {
 
 function draw() {
   // background behind artwork
-  background(0);
+  background(225, 204, 0);
 
-  fill(255); // Set text color to white
+  fill(0); // Set text color to white
   text("Tap anywhere to start or pause the music", 10, 20);
 
   // artwork background (yellow)
-
+  push();
+  noStroke();
   fill(225, 204, 0);
   let rectWidth = min(910, windowWidth);                // limit the width to 910
   let rectHeight = map(rectWidth, 0, 910, 0, 900);      // maintain the aspect ratio
   let x = (windowWidth - rectWidth) / 2;                // x coordinate offset
   let y = (windowHeight - rectHeight) / 2;              // y coordinate offset
   rect(x + rectWidth / 2, y + rectHeight / 2, rectWidth, rectHeight);                    // create yellow rect background
+  pop();
 
   // map X to match resized canvas and store the resized values to wsx, rsx, bsx, and gsx
   for (let i = 0; i < wsX.length; i++) {
@@ -200,7 +202,7 @@ function draw() {
   }
 
   // re-draw the blocks based on the spectrum data
-  for (i = 0; i < spectrum.length; i += 20) {
+  for (i = 0; i < spectrum.length; i += 40) {
     let amp = spectrum[i];
     let scale = map(amp, 0, 256, 0, 1.2);
     // create red blocks using the values from rsx[i], rsy[i], rsw[i], rsh[i]
@@ -240,7 +242,7 @@ function draw() {
   }
 
   // re-draw the blocks based on the spectrum data
-  for (i = 0; i < spectrum.length; i += 3) {
+  for (i = 0; i < spectrum.length; i += 6) {
     let amp = spectrum[i];
     let scale = map(amp, 0, 256, 0, 1.2);
     // create blue blocks using the values from bsx[i], bsy[i], bsw[i], bsh[i]
@@ -268,7 +270,7 @@ function draw() {
   }
 
   // re-draw the blocks based on the spectrum data
-  for (i = 0; i < spectrum.length; i += 1) {
+  for (i = 0; i < spectrum.length; i += 3) {
     let amp = spectrum[i];
     let scale = map(amp, 0, 256, 0, 1.2);
     // create grey blocks using the values from gsx[i], gsy[i], gsw[i], gsh[i]
